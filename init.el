@@ -24,6 +24,19 @@
 
 ;; NEOTREE
 (require 'neotree)
+(setq neo-smart-open t)
+
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+	(file-name (buffer-file-name)))
+    (if project-dir
+	(progn
+	  (neotree-dir project-dir)
+	  (neotree-find file-name))
+      (message "Could not find git project root."))))
+  
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [s-left] 'windmove-left) 
 (global-set-key [s-right] 'windmove-right) 
@@ -41,17 +54,17 @@
 (require 'linum)
 (global-linum-mode 1)
 
-;;;(defun copy-from-osx ()
-;;;       (shell-command-to-string "pbpaste"))
+(defun copy-from-osx ()
+       (shell-command-to-string "pbpaste"))
 
-;;;(defun paste-to-osx (text &optional push)
-;;;       (let ((process-connection-type nil))
-;;;       (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-;;;       (process-send-string proc text)
-;;;       (process-send-eof proc))))
+(defun paste-to-osx (text &optional push)
+       (let ((process-connection-type nil))
+       (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+       (process-send-string proc text)
+       (process-send-eof proc))))
 
-;;;(setq interprogram-cut-function 'paste-to-osx)
-;;;(setq interprogram-paste-function 'copy-from-osx)
+(setq interprogram-cut-function 'paste-to-osx)
+(setq interprogram-paste-function 'copy-from-osx)
 
 
 (custom-set-variables
@@ -64,12 +77,34 @@
     ("c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" default)))
  '(inhibit-default-init t)
  '(inhibit-startup-screen t)
+ '(neo-autorefresh t)
+ '(neo-window-width 35)
  '(package-selected-packages
    (quote
-    (magit monokai-theme json-mode alchemist smex neotree))))
+    (tabbar ivy switch-window yaml-mode ace-window magit monokai-theme json-mode alchemist smex neotree)))
+ '(safe-local-variable-values
+   (quote
+    ((ag-ignore-list "priv/static/**" "vendor/**" "node_modules/**")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(require 'switch-window)
+(global-set-key (kbd "C-x o") 'switch-window)
+(global-set-key (kbd "C-x 1") 'switch-window-then-maximize)
+(global-set-key (kbd "C-x 2") 'switch-window-then-split-below)
+(global-set-key (kbd "C-x 3") 'switch-window-then-split-right)
+(global-set-key (kbd "C-x 0") 'switch-window-then-delete)
+
+(global-set-key (kbd "C-x 4 d") 'switch-window-then-dired)
+(global-set-key (kbd "C-x 4 f") 'switch-window-then-find-file)
+(global-set-key (kbd "C-x 4 m") 'switch-window-then-compose-mail)
+(global-set-key (kbd "C-x 4 r") 'switch-window-then-find-file-read-only)
+
+(global-set-key (kbd "C-x 4 C-f") 'switch-window-then-find-file)
+(global-set-key (kbd "C-x 4 C-o") 'switch-window-then-display-buffer)
+
+(global-set-key (kbd "C-x 4 0") 'switch-window-then-kill-buffer)

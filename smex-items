@@ -1,25 +1,38 @@
 
 ;; ----- smex-history -----
 (
- global-linum-mode
- linum-mode
- load-theme
+ customize-group
+ tabbar-local-mode
  package-install
  package-refresh-contents
- company-mode
  alchemist-mode
+ magit-checkout
+ magit-branch
 )
 
 ;; ----- smex-data -----
 (
- (package-install . 9)
- (package-refresh-contents . 3)
+ (package-install . 19)
+ (package-refresh-contents . 6)
  (mouse-major-mode-menu . 1)
- (alchemist-mode . 2)
+ (alchemist-mode . 3)
  (alchemist-server-start . 1)
  (alchemist-server-status . 1)
  (company-mode . 1)
  (linum-mode . 3)
  (load-theme . 1)
  (global-linum-mode . 4)
+ (neotree-enter-ace-window . 1)
+ (set-terminal-coding-system . 1)
+ (neotree-find . 6)
+ (search-forward . 5)
+ (alchemist-refcard . 2)
+ (alchemist-phoenix-mode . 2)
+ (yaml-mode . 1)
+ (magit-branch . 1)
+ (magit-checkout . 1)
+ (magit-process-mode . 2)
+ (alchemist-project-toggle-file-and-tests . 4)
+ (tabbar-local-mode . 1)
+ (customize-group . 2)
 )
